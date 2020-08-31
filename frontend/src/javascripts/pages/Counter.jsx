@@ -1,31 +1,33 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { countUp, countDown } from '../../actions';
 
-class Counter extends React.Component {
-  constructor(props) {
-    super(props);
-    this.countUp = this.countUp.bind(this);
-    this.countDown = this.countDown.bind(this);
-  }
-  countUp() {
-    this.props.countUp();
-  }
+const counterSelector = (state) => state.counter;
 
-  countDown() {
-    this.props.countDown();
-  }
-  render() {
-    return (
-      <div className="mt-20">
-        <div>count:{this.props.count}</div>
-        <button onClick={this.countUp}>up!</button>
-        <button onClick={this.countDown}>down!</button>
-      </div>
-    );
-  }
-}
+export const Counter = (props) => {
+  const dispatch = useDispatch();
+  const counter = useSelector(counterSelector);
 
-const mapStateToProps = (state) => ({ count: state.count });
+  const countUp = () => {
+    dispatch({ type: 'COUNT_UP' });
+  };
 
-export default connect(mapStateToProps, { countUp, countDown })(Counter);
+  const countDown = () => {
+    dispatch({ type: 'COUNT_DOWN' });
+  };
+
+  return (
+    <div className="mt-20">
+      <div>count:{counter}</div>
+      {/* <button onClick={() => dispatch(countUp())}>up!</button> */}
+      {/* <button onClick={() => dispatch(countDown())}>down!</button> */}
+      <button onClick={countUp}>up!</button>
+      <button onClick={countDown}>down!</button>
+    </div>
+  );
+};
+
+// const mapStateToProps = (state) => ({ count: state.count });
+
+// export default connect(mapStateToProps, { countUp, countDown })(Counter);
