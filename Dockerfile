@@ -16,11 +16,11 @@ RUN apt-get update && apt-get install -y curl apt-transport-https wget && \
   apt-get update && apt-get install -y yarn
 
 RUN apt-get install -y imagemagick libmagickcore-dev libmagickwand-dev
-RUN mkdir /sugomori
-WORKDIR /sugomori
-ADD . /sugomori
-COPY Gemfile /sugomori/Gemfile
-COPY Gemfile.lock /sugomori/Gemfile.lock
+RUN mkdir /Redux-sugomori
+WORKDIR /Redux-sugomori
+ADD . /Redux-sugomori
+COPY Gemfile /Redux-sugomori/Gemfile
+COPY Gemfile.lock /Redux-sugomori/Gemfile.lock
 RUN gem install bundler
 RUN bundle install
 RUN SECRET_KEY_BASE=placeholder bundle exec rails assets:precompile

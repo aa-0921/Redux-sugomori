@@ -86,6 +86,12 @@ export function Header(props: any) {
                         {props.currentUserData != null ? (
                           <React.Fragment>
                             <Link
+                              to="/redux"
+                              className="text-lg text-white ml-4 px-3 py-2 rounded-md sm:test-sm font-medium hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
+                            >
+                              redux
+                            </Link>
+                            <Link
                               to="/feed"
                               className="text-lg text-white ml-4 px-3 py-2 rounded-md sm:test-sm font-medium hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
                             >
@@ -114,6 +120,12 @@ export function Header(props: any) {
                           </React.Fragment>
                         ) : (
                             <React.Fragment>
+                              <Link
+                                to="/redux"
+                                className="text-lg text-white ml-4 px-3 py-2 rounded-md sm:test-sm font-medium hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
+                              >
+                                redux
+                            </Link>
                               <Link
                                 to="/"
                                 className="text-lg text-white ml-4 px-3 py-2 rounded-md sm:test-sm font-medium hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"

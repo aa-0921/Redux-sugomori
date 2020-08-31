@@ -5,6 +5,8 @@ import { BeforeLoginPosts } from '../pages/BeforeLoginPosts';
 import { useToasts } from '@zeit-ui/react';
 import { useEffect } from 'react';
 import { Skroller } from '../pages/Skroller';
+import { Counter } from '../pages/Counter';
+
 
 export const BeforeLogin = () => {
   // toast関連
@@ -25,6 +27,8 @@ export const BeforeLogin = () => {
       <Switch>
         <Route exact path="/home" component={BeforeLoginPosts} />
         <Route exact path="/" component={Skroller} />
+        <Route exact path="/redux" component={Counter} />
+
       </Switch>
     </BrowserRouter>
   );
