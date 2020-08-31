@@ -101317,9 +101317,8 @@ var BeforeLoginPosts = exports.BeforeLoginPosts = function BeforeLoginPosts(prop
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Counter = undefined;
 
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(1);
 
@@ -101327,58 +101326,73 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(1082);
 
-var _index = __webpack_require__(1106);
+var _actions = __webpack_require__(1106);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Counter = exports.Counter = function Counter() {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     count: 0,
-  //   };
-  //   this.countUp = this.countUp.bind(this);
-  //   this.countDown = this.countDown.bind(this);
-  var _useState = (0, _react.useState)(0),
-      _useState2 = _slicedToArray(_useState, 2),
-      count = _useState2[0],
-      setCount = _useState2[1];
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-  // const countUp = () => {
-  //   setCount(count + 1);
-  // };
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-  // const countDown = () => {
-  //   setCount(count - 1);
-  // };
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-  return _react2.default.createElement(
-    'div',
-    { className: 'mt-20' },
-    _react2.default.createElement(
-      'div',
-      null,
-      'count:',
-      count
-    ),
-    _react2.default.createElement(
-      'button',
-      { className: 'bg-gray-500', onClick: _index.countUp },
-      'up!'
-    ),
-    _react2.default.createElement(
-      'button',
-      { className: 'bg-gray-300', onClick: _index.countDown },
-      'down!'
-    )
-  );
+var Counter = function (_React$Component) {
+  _inherits(Counter, _React$Component);
+
+  function Counter(props) {
+    _classCallCheck(this, Counter);
+
+    var _this = _possibleConstructorReturn(this, (Counter.__proto__ || Object.getPrototypeOf(Counter)).call(this, props));
+
+    _this.countUp = _this.countUp.bind(_this);
+    _this.countDown = _this.countDown.bind(_this);
+    return _this;
+  }
+
+  _createClass(Counter, [{
+    key: 'countUp',
+    value: function countUp() {
+      this.props.countUp();
+    }
+  }, {
+    key: 'countDown',
+    value: function countDown() {
+      this.props.countDown();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'mt-20' },
+        _react2.default.createElement(
+          'div',
+          null,
+          'count:',
+          this.props.count
+        ),
+        _react2.default.createElement(
+          'button',
+          { onClick: this.countUp },
+          'up!'
+        ),
+        _react2.default.createElement(
+          'button',
+          { onClick: this.countDown },
+          'down!'
+        )
+      );
+    }
+  }]);
+
+  return Counter;
+}(_react2.default.Component);
+
+var mapStateToProps = function mapStateToProps(state) {
+  return { count: state.count };
 };
 
-var mapStateToProps = function mapStateToProps(count) {
-  return { count: count };
-};
-
-exports.default = (0, _reactRedux.connect)(mapStateToProps, { countUp: _index.countUp, countDown: _index.countDown })(Counter);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, { countUp: _actions.countUp, countDown: _actions.countDown })(Counter);
 
 /***/ }),
 /* 1079 */
