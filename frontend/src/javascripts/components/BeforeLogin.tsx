@@ -5,7 +5,7 @@ import { BeforeLoginPosts } from '../pages/BeforeLoginPosts';
 import { useToasts } from '@zeit-ui/react';
 import { useEffect } from 'react';
 import { Skroller } from '../pages/Skroller';
-import { Counter } from '../pages/Counter';
+import Counter from '../pages/Counter';
 
 
 export const BeforeLogin = () => {

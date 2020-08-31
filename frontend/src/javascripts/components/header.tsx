@@ -142,15 +142,7 @@ export function Header(props: any) {
                               <ButtonDropdown.Item main>
                                 Settings
                               </ButtonDropdown.Item>
-                              {/* <ButtonDropdown.Item>
-                                <a
-                                  href="/users/edit"
-                                  className="block px-4 py-2 sm:test-sm text-gray-700"
-                                  role="menuitem"
-                                >
-                                  プロフィール変更
-                                </a>
-                              </ButtonDropdown.Item> */}
+
                               <ButtonDropdown.Item>
                                 <a
                                   href="/users/sign_out"

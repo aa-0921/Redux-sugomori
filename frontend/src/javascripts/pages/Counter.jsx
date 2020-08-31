@@ -18,7 +18,7 @@ export default class Counter extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className="mt-20">
         <div>count:{this.state.count}</div>
         <button onClick={this.countUp}>up!</button>
         <button onClick={this.countDown}>down!</button>
