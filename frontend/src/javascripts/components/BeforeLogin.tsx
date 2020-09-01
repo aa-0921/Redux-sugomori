@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import { Skroller } from '../pages/Skroller';
 import { Counter } from '../pages/Counter';
 
-import { createStore } from 'redux';
+import { createStore, compose } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from '../../reducers'
 
@@ -27,18 +27,29 @@ export const BeforeLogin = () => {
   const currentUserData = null;
 
   const store = createStore(reducer);
+
+  // デバッグ
+  // const window: any = ""
+  // const store = createStore(
+  //   reducer,
+  //   compose(
+  //     process.env.NODE_ENV === 'development' && window.devToolsExtension ? window.devToolsExtension() : f => f
+  //   )
+  // )
   return (
     <BrowserRouter>
-      <Header currentUserData={currentUserData} />
-      <Switch>
-        <Route exact path="/home" component={BeforeLoginPosts} />
-        <Route exact path="/" component={Skroller} />
+      <Provider store={store}>
 
-        <Provider store={store}>
+        <Header currentUserData={currentUserData} />
+        <Switch>
+          <Route exact path="/home" component={BeforeLoginPosts} />
+          <Route exact path="/" component={Skroller} />
+
           <Route exact path="/redux" component={Counter} />
-        </Provider>
 
-      </Switch>
+        </Switch>
+      </Provider>
+
     </BrowserRouter>
   );
 };
