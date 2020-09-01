@@ -22,12 +22,12 @@ export const Counter = (props) => {
   //   dispatch({ type: 'COUNT_DOWN' });
   // };
   const onCountUp = () => {
-    props.countUp();
+    countUp();
     console.log('onCountUp')
   };
 
   const onCountDown = () => {
-    props.countDown();
+    countDown();
     console.log('onCountDown')
   };
 

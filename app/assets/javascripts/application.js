@@ -101352,12 +101352,12 @@ var Counter = exports.Counter = function Counter(props) {
   //   dispatch({ type: 'COUNT_DOWN' });
   // };
   var onCountUp = function onCountUp() {
-    props.countUp();
+    (0, _actions.countUp)();
     console.log('onCountUp');
   };
 
   var onCountDown = function onCountDown() {
-    props.countDown();
+    (0, _actions.countDown)();
     console.log('onCountDown');
   };
 
@@ -103678,11 +103678,11 @@ Object.defineProperty(exports, "__esModule", {
 // Action & ActionCreator
 var countUp = exports.countUp = function countUp() {
   console.log('ActionのcountUp');
-  ({ type: 'COUNT_UP' });
+  return { type: 'COUNT_UP' };
 };
 var countDown = exports.countDown = function countDown() {
   console.log('ActionのcountDown');
-  ({ type: 'COUNT_DOWN' });
+  return { type: 'COUNT_DOWN' };
 };
 
 /***/ }),
