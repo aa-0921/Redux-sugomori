@@ -100902,6 +100902,9 @@ exports.BeforeLogin = undefined;
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
+// import { createStore, compose } from 'redux';
+
+
 var _react = __webpack_require__(1);
 
 var React = _interopRequireWildcard(_react);
@@ -100930,6 +100933,47 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
+// declare global {
+//   interface Window {
+//     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+//   }
+// // }
+// declare global {
+//   interface Window {
+//     __REDUX_DEVTOOLS_EXTENSION__: any
+//   }
+// }
+
+// const store = createStore(
+//   reducer, /* preloadedState, */
+//   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+// );
+
+
+// const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+// const store = createStore(reducer, composeEnhancers())
+
+// const anyWindow = window as any
+
+
+// const store = createStore(
+//   reducer,
+//   (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
+//   (window as any).__REDUX_DEVTOOLS_EXTENSION__()
+// );
+
+var store = (0, _redux.createStore)(_reducers2.default);
+
+// declare global {
+//   interface Window {
+//     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+//   }
+// }
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// const store = createStore(reducer, composeEnhancers())
+
+
 var BeforeLogin = exports.BeforeLogin = function BeforeLogin() {
   // toast関連
   var _useToasts = (0, _react2.useToasts)(),
@@ -100946,17 +100990,27 @@ var BeforeLogin = exports.BeforeLogin = function BeforeLogin() {
   }, []);
 
   var currentUserData = null;
+  console.log('reducer(BeforeLoginコンポーネント)', _reducers2.default);
 
-  var store = (0, _redux.createStore)(_reducers2.default);
+  // const store = createStore(reducer);
+  // console.log('BeforeLoginのstore', store)
 
-  // デバッグ
-  // const window: any = ""
+
+  // interface ExtendedWindow extends Window {
+  //   __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+  // }
+  // declare var window: ExtendedWindow;
+
+  // const composeReduxDevToolsEnhancers = typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+
   // const store = createStore(
-  //   reducer,
-  //   compose(
-  //     process.env.NODE_ENV === 'development' && window.devToolsExtension ? window.devToolsExtension() : f => f
-  //   )
-  // )
+  //   initReducer(),
+  //   state,
+  //   composeReduxDevToolsEnhancers(applyMiddleware(...middlewares))
+  // );
+
+
   return React.createElement(
     _reactRouterDom.BrowserRouter,
     null,
@@ -101340,8 +101394,11 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 // import React from 'react';
 var Counter = exports.Counter = function Counter(props) {
-  console.log('Counterコンポーネント');
-  // const dispatch = useDispatch();
+  // console.log('Counterコンポーネント')
+  // console.log('props', props)
+
+
+  var dispatch = (0, _reactRedux.useDispatch)();
   // const counter = useSelector(counterSelector);
 
   // const onCountUp = () => {
@@ -101352,18 +101409,25 @@ var Counter = exports.Counter = function Counter(props) {
   //   dispatch({ type: 'COUNT_DOWN' });
   // };
   var onCountUp = function onCountUp() {
-    (0, _actions.countUp)();
-    console.log('onCountUp');
+    dispatch((0, _actions.countUp)());
+    // console.log('onCountUp')
+    // console.log('state.count', state.count)
   };
 
   var onCountDown = function onCountDown() {
-    (0, _actions.countDown)();
-    console.log('onCountDown');
+    dispatch((0, _actions.countDown)());
+    // console.log('onCountDown')
+    // console.log('state.count', state.count)
   };
 
   var store = (0, _reactRedux.useStore)();
   var state = store.getState();
-  console.log('store', store);
+  // console.log('store', store)
+  // console.log('state[count]', state['count'])
+  // console.log('state.class', state.class)
+  // console.log('state.count', state.count)
+
+
   return React.createElement(
     'div',
     { className: 'mt-20' },
@@ -103695,7 +103759,11 @@ var countDown = exports.countDown = function countDown() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-// Reducer
+
+var _reactRedux = __webpack_require__(1079);
+
+// const store = useStore()
+// const state = store.getState()
 var reducer = function reducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { count: 0 };
   var action = arguments[1];
@@ -103704,16 +103772,23 @@ var reducer = function reducer() {
   console.log('action.type', action.type);
   console.log('state', state);
 
-  var count = state.count;
+  // const store = useStore()
+  // const state = store.getState()
+
+  // const count = state.count;
+  // console.log('reducerのcount', count)
+
   switch (action.type) {
     case 'COUNT_UP':
-      return { count: count + 1 };
+      console.log('reducerのCOUNT_UP');
+      return { count: state.count + 1 };
     case 'COUNT_DOWN':
-      return { count: count - 1 };
+      console.log('reducerのCOUNT_DOWN');
+      return { count: state.count - 1 };
     default:
       return state;
   }
-};
+}; // Reducer
 
 exports.default = reducer;
 
