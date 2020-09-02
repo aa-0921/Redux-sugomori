@@ -45,7 +45,7 @@ import reducer from '../../reducers/'
 //   (window as any).__REDUX_DEVTOOLS_EXTENSION__()
 // );
 
-const store = createStore(reducer);
+const store = createStore(Reducers);
 
 // declare global {
 //   interface Window {

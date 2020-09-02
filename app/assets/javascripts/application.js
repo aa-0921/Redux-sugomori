@@ -100963,7 +100963,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 //   (window as any).__REDUX_DEVTOOLS_EXTENSION__()
 // );
 
-var store = (0, _redux.createStore)(_reducers2.default);
+var store = (0, _redux.createStore)(Reducers);
 
 // declare global {
 //   interface Window {
@@ -103739,15 +103739,26 @@ __webpack_require__.r(__webpack_exports__);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-// Action & ActionCreator
-var countUp = exports.countUp = function countUp() {
-  console.log('ActionのcountUp');
-  return { type: 'COUNT_UP' };
+var increment = exports.increment = function increment() {
+  return {
+    type: 'INCREMENT'
+  };
 };
-var countDown = exports.countDown = function countDown() {
-  console.log('ActionのcountDown');
-  return { type: 'COUNT_DOWN' };
+var decrement = exports.decrement = function decrement() {
+  return {
+    type: 'DECREMENT'
+  };
 };
+
+// // Action & ActionCreator
+// export const countUp = () => {
+//   console.log('ActionのcountUp');
+//   return ({ type: 'COUNT_UP' });
+// }
+// export const countDown = () => {
+//   console.log('ActionのcountDown');
+//   return ({ type: 'COUNT_DOWN' });
+// }
 
 /***/ }),
 /* 1106 */
@@ -103760,37 +103771,75 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _reactRedux = __webpack_require__(1079);
+var _redux = __webpack_require__(1089);
 
-// const store = useStore()
-// const state = store.getState()
-var reducer = function reducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { count: 0 };
+var _counter = __webpack_require__(1107);
+
+var _counter2 = _interopRequireDefault(_counter);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Reducers = (0, _redux.combineReducers)({
+  counter: _counter2.default
+});
+
+exports.default = Reducers;
+
+// // Reducer
+// import { useDispatch, useSelector, useStore } from 'react-redux';
+// import { combineReducers } from 'redux';
+// // const store = useStore()
+// // const state = store.getState()
+// const reducer = (state = { count: 0 }, action) => {
+//   console.log('reducer通過')
+//   console.log('action.type', action.type)
+//   console.log('state', state);
+
+//   // const store = useStore()
+//   // const state = store.getState()
+
+//   // const count = state.count;
+//   // console.log('reducerのcount', count)
+
+//   switch (action.type) {
+//     case 'COUNT_UP':
+//       console.log('reducerのCOUNT_UP');
+//       return { count: state.count + 1 };
+//     case 'COUNT_DOWN':
+//       console.log('reducerのCOUNT_DOWN');
+//       return { count: state.count - 1 };
+//     default:
+//       return state;
+//   }
+// };
+
+// export default reducer;
+
+/***/ }),
+/* 1107 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var counterReducer = function counterReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
   var action = arguments[1];
 
-  console.log('reducer通過');
-  console.log('action.type', action.type);
-  console.log('state', state);
-
-  // const store = useStore()
-  // const state = store.getState()
-
-  // const count = state.count;
-  // console.log('reducerのcount', count)
-
   switch (action.type) {
-    case 'COUNT_UP':
-      console.log('reducerのCOUNT_UP');
-      return { count: state.count + 1 };
-    case 'COUNT_DOWN':
-      console.log('reducerのCOUNT_DOWN');
-      return { count: state.count - 1 };
+    case 'INCREMENT':
+      return state + 1;
+    case 'DECREMENT':
+      return state - 1;
     default:
       return state;
   }
-}; // Reducer
+};
 
-exports.default = reducer;
+exports.default = counterReducer;
 
 /***/ })
 /******/ ]);
