@@ -101392,7 +101392,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 // const counterSelector = (state) => state.counter;
 
-// import React from 'react';
 var Counter = exports.Counter = function Counter(props) {
   // console.log('Counterコンポーネント')
   // console.log('props', props)
@@ -101408,6 +101407,11 @@ var Counter = exports.Counter = function Counter(props) {
   // const onCountDown = () => {
   //   dispatch({ type: 'COUNT_DOWN' });
   // };
+
+  var count = (0, _reactRedux.useSelector)(function (state) {
+    return state.count;
+  });
+
   var onCountUp = function onCountUp() {
     dispatch((0, _actions.countUp)());
     // console.log('onCountUp')
@@ -101420,13 +101424,16 @@ var Counter = exports.Counter = function Counter(props) {
     // console.log('state.count', state.count)
   };
 
-  var store = (0, _reactRedux.useStore)();
-  var state = store.getState();
+  // const store = useStore()
+  // const state = store.getState()
   // console.log('store', store)
   // console.log('state[count]', state['count'])
   // console.log('state.class', state.class)
   // console.log('state.count', state.count)
 
+  // useEffect(() => {
+  //   console.log('useEffectのstore', store)
+  // }, [store]);
 
   return React.createElement(
     'div',
@@ -101435,7 +101442,7 @@ var Counter = exports.Counter = function Counter(props) {
       'div',
       null,
       'count:',
-      state.count
+      count
     ),
     React.createElement(
       'button',
@@ -101449,14 +101456,13 @@ var Counter = exports.Counter = function Counter(props) {
     )
   );
 };
+
+// const mapStateToProps = (state) => ({ count: state.count });
+
+// export default connect(mapStateToProps, { countUp, countDown })(Counter);
+
 // import { countUp, countDown } from '../../actions/index';
-
-
-var mapStateToProps = function mapStateToProps(state) {
-  return { count: state.count };
-};
-
-exports.default = (0, _reactRedux.connect)(mapStateToProps, { countUp: _actions.countUp, countDown: _actions.countDown })(Counter);
+// import React from 'react';
 
 /***/ }),
 /* 1079 */

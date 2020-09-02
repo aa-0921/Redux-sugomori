@@ -1,5 +1,6 @@
 // import React from 'react';
 import * as React from 'react';
+import { useEffect } from 'react';
 
 import { connect } from 'react-redux';
 import { useDispatch, useSelector, useStore } from 'react-redux';
@@ -8,6 +9,11 @@ import { countUp, countDown } from '../../actions';
 
 
 // const counterSelector = (state) => state.counter;
+
+type State = {
+  count: number
+}
+
 
 export const Counter = (props) => {
   // console.log('Counterコンポーネント')
@@ -24,6 +30,9 @@ export const Counter = (props) => {
   // const onCountDown = () => {
   //   dispatch({ type: 'COUNT_DOWN' });
   // };
+
+  const count = useSelector(state => state.count)
+
   const onCountUp = () => {
     dispatch(countUp());
     // console.log('onCountUp')
@@ -38,21 +47,24 @@ export const Counter = (props) => {
 
   };
 
-  const store = useStore()
-  const state = store.getState()
+  // const store = useStore()
+  // const state = store.getState()
   // console.log('store', store)
   // console.log('state[count]', state['count'])
   // console.log('state.class', state.class)
   // console.log('state.count', state.count)
 
+  // useEffect(() => {
+  //   console.log('useEffectのstore', store)
+  // }, [store]);
 
   return (
     <div className="mt-20">
       {/* <div>count:{store.getState()}</div> */}
-      <div>count:{state.count}</div>
+      {/* <div>count:{store.getState().count}</div> */}
 
       {/* <div>count:{state.value}</div> */}
-      {/* <div>count:{count}</div> */}
+      <div>count:{count}</div>
 
       {/* <div>{props}</div> */}
 
@@ -65,6 +77,6 @@ export const Counter = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({ count: state.count });
+// const mapStateToProps = (state) => ({ count: state.count });
 
-export default connect(mapStateToProps, { countUp, countDown })(Counter);
+// export default connect(mapStateToProps, { countUp, countDown })(Counter);

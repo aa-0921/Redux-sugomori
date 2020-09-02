@@ -106,7 +106,6 @@ export const BeforeLogin = () => {
 
         </Switch>
       </Provider>
-
     </BrowserRouter>
   );
 };
