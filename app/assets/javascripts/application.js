@@ -101372,23 +101372,27 @@ var Counter = exports.Counter = function Counter(props) {
       { onClick: onCountUp },
       'up!'
     ),
+    React.createElement('br', null),
     React.createElement(
       'button',
       { onClick: onCountDown },
       'down!'
     ),
+    React.createElement('br', null),
     React.createElement(
       'button',
       { onClick: onThunkCountUp },
       'thunkUp!'
     ),
+    React.createElement('br', null),
     React.createElement(
       'button',
       { onClick: function onClick() {
           return onDataToCountUp(5);
         } },
       'dataToCountUp!'
-    )
+    ),
+    React.createElement('br', null)
   );
 };
 
@@ -103691,7 +103695,7 @@ var thunkCountUp = exports.thunkCountUp = function thunkCountUp() {
 
 var dataToCountUp = exports.dataToCountUp = function dataToCountUp(data) {
   return {
-    type: 'COUNT_UP',
+    type: 'DATA_TO_COUNT_UP',
     data: data
   };
 };
@@ -103719,11 +103723,14 @@ var reducer = function reducer() {
   switch (action.type) {
     case 'COUNT_UP':
       console.log('reducerのCOUNT_UP');
-      var actionData = action.data;
-      return { count: state.count + actionData };
+      return { count: state.count + 1 };
     case 'COUNT_DOWN':
       console.log('reducerのCOUNT_DOWN');
       return { count: state.count - 1 };
+    case 'DATA_TO_COUNT_UP':
+      console.log('reducerのdataToCountUp');
+      var actionData = action.data;
+      return { count: state.count + actionData };
     default:
       return state;
   }

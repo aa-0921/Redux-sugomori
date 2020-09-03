@@ -16,7 +16,7 @@ export const thunkCountUp = () => {
 
 export const dataToCountUp = (data) => {
   return {
-    type: 'COUNT_UP',
+    type: 'DATA_TO_COUNT_UP',
     data
   }
 }

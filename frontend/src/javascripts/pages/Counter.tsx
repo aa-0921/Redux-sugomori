@@ -30,10 +30,10 @@ export const Counter = (props) => {
     <div className="mt-20">
       <div>count:{count}</div>
 
-      <button onClick={onCountUp}>up!</button>
-      <button onClick={onCountDown}>down!</button>
-      <button onClick={onThunkCountUp}>thunkUp!</button>
-      <button onClick={() => onDataToCountUp(5)}>dataToCountUp!</button>
+      <button onClick={onCountUp}>up!</button><br />
+      <button onClick={onCountDown}>down!</button><br />
+      <button onClick={onThunkCountUp}>thunkUp!</button><br />
+      <button onClick={() => onDataToCountUp(5)}>dataToCountUp!</button><br />
 
 
     </div>

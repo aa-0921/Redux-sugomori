@@ -10,11 +10,14 @@ const reducer = (state = { count: 0 }, action) => {
   switch (action.type) {
     case 'COUNT_UP':
       console.log('reducerのCOUNT_UP');
-      const actionData = action.data
-      return { count: state.count + actionData };
+      return { count: state.count + 1 };
     case 'COUNT_DOWN':
       console.log('reducerのCOUNT_DOWN');
       return { count: state.count - 1 };
+    case 'DATA_TO_COUNT_UP':
+      console.log('reducerのdataToCountUp');
+      const actionData = action.data
+      return { count: state.count + actionData };
     default:
       return state;
   }
