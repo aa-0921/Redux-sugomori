@@ -100902,9 +100902,6 @@ exports.BeforeLogin = undefined;
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
-// import { createStore, compose } from 'redux';
-
-
 var _react = __webpack_require__(1);
 
 var React = _interopRequireWildcard(_react);
@@ -100933,46 +100930,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-// declare global {
-//   interface Window {
-//     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
-//   }
-// // }
-// declare global {
-//   interface Window {
-//     __REDUX_DEVTOOLS_EXTENSION__: any
-//   }
-// }
-
-// const store = createStore(
-//   reducer, /* preloadedState, */
-//   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-// );
-
-
-// const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-// const store = createStore(reducer, composeEnhancers())
-
-// const anyWindow = window as any
-
-
-// const store = createStore(
-//   reducer,
-//   (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
-//   (window as any).__REDUX_DEVTOOLS_EXTENSION__()
-// );
-
 var store = (0, _redux.createStore)(_reducers2.default);
-
-// declare global {
-//   interface Window {
-//     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
-//   }
-// }
-// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-// const store = createStore(reducer, composeEnhancers())
-
 
 var BeforeLogin = exports.BeforeLogin = function BeforeLogin() {
   // toast関連
@@ -100991,25 +100949,6 @@ var BeforeLogin = exports.BeforeLogin = function BeforeLogin() {
 
   var currentUserData = null;
   console.log('reducer(BeforeLoginコンポーネント)', _reducers2.default);
-
-  // const store = createStore(reducer);
-  // console.log('BeforeLoginのstore', store)
-
-
-  // interface ExtendedWindow extends Window {
-  //   __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
-  // }
-  // declare var window: ExtendedWindow;
-
-  // const composeReduxDevToolsEnhancers = typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-
-  // const store = createStore(
-  //   initReducer(),
-  //   state,
-  //   composeReduxDevToolsEnhancers(applyMiddleware(...middlewares))
-  // );
-
 
   return React.createElement(
     _reactRouterDom.BrowserRouter,
@@ -101390,50 +101329,20 @@ var _actions = __webpack_require__(1105);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-// const counterSelector = (state) => state.counter;
-
 var Counter = exports.Counter = function Counter(props) {
-  // console.log('Counterコンポーネント')
-  // console.log('props', props)
-
-
   var dispatch = (0, _reactRedux.useDispatch)();
-  // const counter = useSelector(counterSelector);
-
-  // const onCountUp = () => {
-  //   dispatch({ type: 'COUNT_UP' });
-  // };
-
-  // const onCountDown = () => {
-  //   dispatch({ type: 'COUNT_DOWN' });
-  // };
-
+  // ts-loaderを入れていないので、VScode上ではエラーがでるが、コンパイルは通る。
   var count = (0, _reactRedux.useSelector)(function (state) {
     return state.count;
   });
 
   var onCountUp = function onCountUp() {
     dispatch((0, _actions.countUp)());
-    // console.log('onCountUp')
-    // console.log('state.count', state.count)
   };
 
   var onCountDown = function onCountDown() {
     dispatch((0, _actions.countDown)());
-    // console.log('onCountDown')
-    // console.log('state.count', state.count)
   };
-
-  // const store = useStore()
-  // const state = store.getState()
-  // console.log('store', store)
-  // console.log('state[count]', state['count'])
-  // console.log('state.class', state.class)
-  // console.log('state.count', state.count)
-
-  // useEffect(() => {
-  //   console.log('useEffectのstore', store)
-  // }, [store]);
 
   return React.createElement(
     'div',
@@ -101456,13 +101365,6 @@ var Counter = exports.Counter = function Counter(props) {
     )
   );
 };
-
-// const mapStateToProps = (state) => ({ count: state.count });
-
-// export default connect(mapStateToProps, { countUp, countDown })(Counter);
-
-// import { countUp, countDown } from '../../actions/index';
-// import React from 'react';
 
 /***/ }),
 /* 1079 */
@@ -103747,11 +103649,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 // Action & ActionCreator
 var countUp = exports.countUp = function countUp() {
-  console.log('ActionのcountUp');
   return { type: 'COUNT_UP' };
 };
 var countDown = exports.countDown = function countDown() {
-  console.log('ActionのcountDown');
   return { type: 'COUNT_DOWN' };
 };
 
@@ -103765,11 +103665,7 @@ var countDown = exports.countDown = function countDown() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _reactRedux = __webpack_require__(1079);
-
-// const store = useStore()
-// const state = store.getState()
+// Reducer
 var reducer = function reducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { count: 0 };
   var action = arguments[1];
@@ -103777,12 +103673,6 @@ var reducer = function reducer() {
   console.log('reducer通過');
   console.log('action.type', action.type);
   console.log('state', state);
-
-  // const store = useStore()
-  // const state = store.getState()
-
-  // const count = state.count;
-  // console.log('reducerのcount', count)
 
   switch (action.type) {
     case 'COUNT_UP':
@@ -103794,7 +103684,7 @@ var reducer = function reducer() {
     default:
       return state;
   }
-}; // Reducer
+};
 
 exports.default = reducer;
 
