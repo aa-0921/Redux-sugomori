@@ -13,3 +13,10 @@ export const thunkCountUp = () => {
     }, 1000);
   };
 }
+
+export const dataToCountUp = (data) => {
+  return {
+    type: 'COUNT_UP',
+    data
+  }
+}

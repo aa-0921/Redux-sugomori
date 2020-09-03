@@ -101347,9 +101347,16 @@ var Counter = exports.Counter = function Counter(props) {
   var onCountDown = function onCountDown() {
     dispatch((0, _actions.countDown)());
   };
+
   var onThunkCountUp = function onThunkCountUp() {
     dispatch((0, _actions.thunkCountUp)());
   };
+
+  var onDataToCountUp = function onDataToCountUp(num) {
+    dispatch((0, _actions.dataToCountUp)(num));
+  };
+
+  // const displayState = getState();
 
   return React.createElement(
     'div',
@@ -101374,6 +101381,13 @@ var Counter = exports.Counter = function Counter(props) {
       'button',
       { onClick: onThunkCountUp },
       'thunkUp!'
+    ),
+    React.createElement(
+      'button',
+      { onClick: function onClick() {
+          return onDataToCountUp(5);
+        } },
+      'dataToCountUp!'
     )
   );
 };
@@ -103675,6 +103689,13 @@ var thunkCountUp = exports.thunkCountUp = function thunkCountUp() {
   };
 };
 
+var dataToCountUp = exports.dataToCountUp = function dataToCountUp(data) {
+  return {
+    type: 'COUNT_UP',
+    data: data
+  };
+};
+
 /***/ }),
 /* 1106 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -103693,11 +103714,13 @@ var reducer = function reducer() {
   console.log('reducer通過');
   console.log('action.type', action.type);
   console.log('state', state);
+  console.log('action', action);
 
   switch (action.type) {
     case 'COUNT_UP':
       console.log('reducerのCOUNT_UP');
-      return { count: state.count + 1 };
+      var actionData = action.data;
+      return { count: state.count + actionData };
     case 'COUNT_DOWN':
       console.log('reducerのCOUNT_DOWN');
       return { count: state.count - 1 };
