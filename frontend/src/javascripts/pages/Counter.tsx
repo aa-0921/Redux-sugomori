@@ -1,7 +1,7 @@
 
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { countUp, countDown } from '../../actions';
+import { countUp, countDown, thunkCountUp } from '../../actions';
 
 export const Counter = (props) => {
   const dispatch = useDispatch();
@@ -15,6 +15,9 @@ export const Counter = (props) => {
   const onCountDown = () => {
     dispatch(countDown());
   };
+  const onThunkCountUp = () => {
+    dispatch(thunkCountUp());
+  };
 
   return (
     <div className="mt-20">
@@ -22,6 +25,8 @@ export const Counter = (props) => {
 
       <button onClick={onCountUp}>up!</button>
       <button onClick={onCountDown}>down!</button>
+      <button onClick={onThunkCountUp}>thunkUp!</button>
+
     </div>
   );
 };

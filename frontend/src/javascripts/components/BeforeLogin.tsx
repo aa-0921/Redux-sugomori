@@ -9,11 +9,15 @@ import { Counter } from '../pages/Counter';
 
 import {
   createStore,
+  applyMiddleware
 } from "redux";
 import { Provider } from 'react-redux';
 import reducer from '../../reducers/'
 
-const store = createStore(reducer);
+import thunk from 'redux-thunk';
+
+
+const store = createStore(reducer, applyMiddleware(thunk));
 
 export const BeforeLogin = () => {
   // toast関連

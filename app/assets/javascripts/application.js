@@ -100926,11 +100926,15 @@ var _reducers = __webpack_require__(1106);
 
 var _reducers2 = _interopRequireDefault(_reducers);
 
+var _reduxThunk = __webpack_require__(1107);
+
+var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-var store = (0, _redux.createStore)(_reducers2.default);
+var store = (0, _redux.createStore)(_reducers2.default, (0, _redux.applyMiddleware)(_reduxThunk2.default));
 
 var BeforeLogin = exports.BeforeLogin = function BeforeLogin() {
   // toast関連
@@ -101343,6 +101347,9 @@ var Counter = exports.Counter = function Counter(props) {
   var onCountDown = function onCountDown() {
     dispatch((0, _actions.countDown)());
   };
+  var onThunkCountUp = function onThunkCountUp() {
+    dispatch((0, _actions.thunkCountUp)());
+  };
 
   return React.createElement(
     'div',
@@ -101362,6 +101369,11 @@ var Counter = exports.Counter = function Counter(props) {
       'button',
       { onClick: onCountDown },
       'down!'
+    ),
+    React.createElement(
+      'button',
+      { onClick: onThunkCountUp },
+      'thunkUp!'
     )
   );
 };
@@ -103655,6 +103667,14 @@ var countDown = exports.countDown = function countDown() {
   return { type: 'COUNT_DOWN' };
 };
 
+var thunkCountUp = exports.thunkCountUp = function thunkCountUp() {
+  return function (dispatch) {
+    setTimeout(function () {
+      dispatch(countUp());
+    }, 1000);
+  };
+};
+
 /***/ }),
 /* 1106 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -103687,6 +103707,33 @@ var reducer = function reducer() {
 };
 
 exports.default = reducer;
+
+/***/ }),
+/* 1107 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function createThunkMiddleware(extraArgument) {
+  return function (_ref) {
+    var dispatch = _ref.dispatch,
+        getState = _ref.getState;
+    return function (next) {
+      return function (action) {
+        if (typeof action === 'function') {
+          return action(dispatch, getState, extraArgument);
+        }
+
+        return next(action);
+      };
+    };
+  };
+}
+
+var thunk = createThunkMiddleware();
+thunk.withExtraArgument = createThunkMiddleware;
+
+/* harmony default export */ __webpack_exports__["default"] = (thunk);
 
 /***/ })
 /******/ ]);
