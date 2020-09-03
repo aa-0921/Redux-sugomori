@@ -1,7 +1,7 @@
 
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { countUp, countDown, thunkCountUp, dataToCountUp } from '../../actions';
+import { countUp, countDown, thunkCountUp, dataToCountUp, getAddress } from '../../actions';
 
 export const Counter = (props) => {
   const dispatch = useDispatch();
@@ -24,6 +24,10 @@ export const Counter = (props) => {
     dispatch(dataToCountUp(num));
   };
 
+  const onGetAddress = (num) => {
+    dispatch(getAddress(num));
+  };
+
   // const displayState = getState();
 
   return (
@@ -34,7 +38,7 @@ export const Counter = (props) => {
       <button onClick={onCountDown}>down!</button><br />
       <button onClick={onThunkCountUp}>thunkUp!</button><br />
       <button onClick={() => onDataToCountUp(5)}>dataToCountUp!</button><br />
-
+      <button onClick={() => onGetAddress(2120055)}>getAddress!</button><br />
 
     </div>
   );

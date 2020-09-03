@@ -101356,6 +101356,10 @@ var Counter = exports.Counter = function Counter(props) {
     dispatch((0, _actions.dataToCountUp)(num));
   };
 
+  var onGetAddress = function onGetAddress(num) {
+    dispatch((0, _actions.getAddress)(num));
+  };
+
   // const displayState = getState();
 
   return React.createElement(
@@ -101391,6 +101395,14 @@ var Counter = exports.Counter = function Counter(props) {
           return onDataToCountUp(5);
         } },
       'dataToCountUp!'
+    ),
+    React.createElement('br', null),
+    React.createElement(
+      'button',
+      { onClick: function onClick() {
+          return onGetAddress(2120055);
+        } },
+      'getAddress!'
     ),
     React.createElement('br', null)
   );
@@ -103677,6 +103689,14 @@ __webpack_require__.r(__webpack_exports__);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.getAddress = exports.getAddressFailure = exports.getAddressSuccess = exports.getAddressRequest = exports.dataToCountUp = exports.thunkCountUp = exports.countDown = exports.countUp = undefined;
+
+var _axios = __webpack_require__(837);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 // Action & ActionCreator
 var countUp = exports.countUp = function countUp() {
   return { type: 'COUNT_UP' };
@@ -103697,6 +103717,47 @@ var dataToCountUp = exports.dataToCountUp = function dataToCountUp(data) {
   return {
     type: 'DATA_TO_COUNT_UP',
     data: data
+  };
+};
+
+// ---------------------------------------------------
+
+var getAddressRequest = exports.getAddressRequest = function getAddressRequest() {
+  return {
+    type: 'GET_ADDRESS_REQUEST'
+  };
+};
+
+var getAddressSuccess = exports.getAddressSuccess = function getAddressSuccess(data) {
+  console.log('getAddressSuccessのdata', data);
+  return {
+    type: 'GET_ADDRESS_SUCCESS',
+    data: data
+  };
+};
+
+var getAddressFailure = exports.getAddressFailure = function getAddressFailure(error) {
+  return {
+    type: 'GET_ADDRESS_FAILURE',
+    error: error
+  };
+};
+
+var getAddress = exports.getAddress = function getAddress(zipcode) {
+  return async function (dispatch) {
+    console.log('zipcode', zipcode);
+    console.log('zipcode.class', zipcode.class);
+
+    dispatch(getAddressRequest());
+    try {
+      var res = await _axios2.default.get('https://api.zipaddress.net/?', { params: { zipcode: zipcode } });
+      console.log('getAddressのres.data', res.data.data.pref.length);
+      // console.log('getAddressのres.data', res.data)
+
+      return dispatch(getAddressSuccess(res.data.data.pref.length));
+    } catch (err) {
+      return dispatch(getAddressFailure(err));
+    }
   };
 };
 
@@ -103731,6 +103792,30 @@ var reducer = function reducer() {
       console.log('reducerのdataToCountUp');
       var actionData = action.data;
       return { count: state.count + actionData };
+    // ----------------------------------------------
+
+    case 'GET_ADDRESS_REQUEST':
+      return { count: state.count };
+    // return Object.assign({}, state, {
+    //   isFetching: true,
+    //   address: []
+    // });
+    case 'GET_ADDRESS_SUCCESS':
+      console.log('reducerのaction.data', action.data);
+      return { count: state.count + action.data };
+    // return Object.assign({}, state, {
+    //   isFetching: false,
+    //   address: action.data,
+    // });
+    case 'GET_ADDRESS_FAILURE':
+      return { count: state.count };
+
+    // return Object.assign({}, state, {
+    //   isFetching: false,
+    //   error: action.error
+    // });
+
+
     default:
       return state;
   }
